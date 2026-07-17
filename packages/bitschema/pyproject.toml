@@ -1,0 +1,15 @@
+[project]
+name = "bitschema"
+version = "0.0.1a1"
+description = "Bit (and enum) oriented binary serialization library for Python and embedded systems"
+authors = [{ name = "Robert Łabuz", email = "RobertDominikLabuz@gmail.com" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+# [build-system]
+# requires = ["uv"]
+# build-backend = "uv.build"
+
+

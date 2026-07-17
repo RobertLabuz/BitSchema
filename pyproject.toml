@@ -1,0 +1,24 @@
+[project]
+name = "bitschema-monorepo"
+version = "0.0.1a1"
+description = "Monorepo for binary serialization project"
+requires-python = "==3.10.*" # First supporting match case
+authors = [{ name = "Robert Łabuz", email = "RobertDominikLabuz@gmail.com" }]
+readme = "README.md"
+license = "MIT"
+
+dependencies = [
+    "bitschema",
+]
+
+
+[tool.uv.sources]
+bitschema = { workspace = true }
+
+
+[tool.uv.workspace]
+members = [ "packages/*" ]
+
+
+[project.optional-dependencies]
+tools = ["ruff", "mypy", "pytest"]
