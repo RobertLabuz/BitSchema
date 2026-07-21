@@ -51,6 +51,12 @@ format_and_check: format_py lint typecheck
 test_all: reinstall_packages test_py_units test_integration
 
 git_update_submodules:
-    git submodule --init
     git submodule update --init --recursive
 
+cmake_flags := '-G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++'
+
+cpp_test_example:
+    cmake -S tests/cpp/examples/full_build -B tests/cpp/examples/full_build/build {{cmake_flags}}
+    cmake --build tests/cpp/examples/full_build/build
+    ctest --test-dir tests/cpp/examples/full_build/build --output-on-failure
+    
