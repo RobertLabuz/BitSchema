@@ -1,6 +1,7 @@
 # Easy start: https://github.com/casey/just/blob/master/README.md#shell
 # To check available recipes, type just -l
 
+
 [windows]
 set shell := ["powershell.exe", "-NoLogo", "-Command"]
 
@@ -28,10 +29,8 @@ format_py:
 # For more information, see https://mypy.readthedocs.io/
 typecheck:
     uv run python -m mypy ./tests/py  
-    uv run python -m mypy ./tests/py  
     uv run python -m mypy ./packages/bitschema/src --strict
     uv run python -m mypy ./packages/bitschema/tests # Relaxed for tests 
-    uv run python -m mypy ./tests-integration  
 
 # Run Python unit tests
 test_py_units:
@@ -50,3 +49,8 @@ format_and_check: format_py lint typecheck
 
 # Reinstall packages and run all tests
 test_all: reinstall_packages test_py_units test_integration
+
+git_update_submodules:
+    git submodule --init
+    git submodule update --init --recursive
+
