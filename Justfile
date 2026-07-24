@@ -1,13 +1,13 @@
 # Easy start: https://github.com/casey/just/blob/master/README.md#shell
-# To check available recipes, type just -l
-
 
 [windows]
 set shell := ["powershell.exe", "-NoLogo", "-Command"]
 
+default: # 
+    just --list # or -l
 
 hello:
-    Write-Host "Hello, world! Type just -l to list recipes"
+    @echo "Hello, world! Type just -l to list recipes"
 
 # Initialize uv workspace. Install additional tools and dependencies
 init:
@@ -56,7 +56,6 @@ git_update_submodules:
 cmake_flags := '-G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++'
 
 cpp_test_example:
-    cmake -S tests/cpp/examples/full_build -B tests/cpp/examples/full_build/build {{cmake_flags}}
-    cmake --build tests/cpp/examples/full_build/build
-    ctest --test-dir tests/cpp/examples/full_build/build --output-on-failure
-    
+    cmake -S tests/cpp/examples/hello -B tests/cpp/examples/hello/build {{cmake_flags}}
+    cmake --build tests/cpp/examples/hello/build
+    ctest --test-dir tests/cpp/examples/hello/build --output-on-failure
