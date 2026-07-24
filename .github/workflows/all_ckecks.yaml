@@ -5,12 +5,14 @@ on:
       - main # todo: pythons / compilers / real hardware matrix tests here
       - develop
       - "release/*"
+      - "feature/*" # todo only for CI test
       
   pull_request:
     branches:
       - main
       - develop
       - "release/*"
+      - "feature/*" # todo only for CI test
 
 
 jobs:
