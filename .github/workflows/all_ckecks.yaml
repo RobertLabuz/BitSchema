@@ -1,0 +1,49 @@
+name: Run all checks
+on:
+  push:
+    branches:
+      - main # todo: pythons / compilers / real hardware matrix tests here
+      - develop
+      - "release/*"
+      
+  pull_request:
+    branches:
+      - main
+      - develop
+      - "release/*"
+
+
+jobs:
+  all_in_one:
+    name: Combo job that contain all steps
+    runs-on: ubuntu-slim
+    # runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get UV, Just
+        run: |
+          pwd
+          wget -qO- https://astral.sh/uv/install.sh | sh
+          uv tool install rust-just
+          just hello
+
+      - name: Initialize workspace
+        run: |
+          just init
+          just git_update_submodules
+          just reinstall_packages
+
+      - name: Lint and typecheck
+        run: |
+          just lint_github
+          just typecheck
+
+      - name: Test units
+        run: |
+          just test_py_units
+          just cpp_test_example
+
+      - name: Test integration
+        run: |
+          just test_integration
